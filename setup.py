@@ -10,8 +10,8 @@ setup(name='haste_cloud_gateway',
       author='Ben Blamey',
       author_email='ben.blamey@it.uu.se',
       install_requires=[
-          'aiohttp'
-
+          'aiohttp',
+          'harmonicIO'
       ],
       test_requires=[
           'pytest'
