@@ -42,11 +42,14 @@ async def handle_blob(request):
 
     stream_id = request.match_info.get('stream_id')
 
+    file = await request.content.read()
+
     metadata = {
         'timestamp': original_timestamp,
         'original_filename': original_filename,
         'tag': tag,
-        'stream_id': stream_id}
+        'stream_id': stream_id,
+        'image_length_bytes': len(file)}
 
     logging.info(metadata)
 
@@ -62,7 +65,6 @@ async def handle_blob(request):
     # The format of this binary blob is specific to the image analysis code.
     # TODO: add link!
     pickled_metadata = bytearray(pickle.dumps(metadata))
-    file = await request.content.read()
     message_bytes = pickled_metadata + file
 
     logging.info('sending data to HIO...')

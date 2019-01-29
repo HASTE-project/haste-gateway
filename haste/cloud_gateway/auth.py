@@ -12,7 +12,7 @@ def creds_to_digest(username, password):
 
 
 def is_valid_login(auth_header, secret):
-    digest = hashlib.sha224(_SALT + bytes(auth_header, 'utf-8')).hexdigest()
+    digest = hashlib.sha224(_SALT + bytes(str(auth_header), 'utf-8')).hexdigest()
     return digest == secret
 
 
