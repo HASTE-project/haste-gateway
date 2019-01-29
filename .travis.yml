@@ -1,5 +1,7 @@
 language: python
 
+notifications:
+  email: false
 
 before_install:
   - docker build --no-cache=true -t "benblamey/haste-gateway:latest" .

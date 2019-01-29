@@ -57,7 +57,7 @@ async def handle_blob(request):
         config = {
             'container_name': 'benblamey/haste-image-proc:latest',
             'container_os': 'ubuntu'}
-        logging.info(f'accepted tag:{vironova}, config:{config}')
+        logging.info(f'accepted tag:{tag}, config:{config}')
     else:
         logging.info(f'rejected tag:{tag}')
         return await _412_tag_unknown()
