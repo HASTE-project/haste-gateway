@@ -9,9 +9,9 @@ import sys
 
 from harmonicIO.stream_connector.stream_connector import StreamConnector
 
-_username = sys.argv[1]
-_password = sys.argv[2]
-_auth_header = aiohttp.BasicAuth(login=_username, password=_password).encode()
+from haste.cloud_gateway.auth import is_valid_login
+
+_secret = sys.argv[1]
 
 # std_idle_time is in seconds
 
@@ -23,7 +23,7 @@ sc = StreamConnector(HIO_MASTER_HOST, HIO_MASTER_PORT, max_try=1, std_idle_time=
 
 async def handle(request):
     # TODO: for security, this should be constant-time equlity compare
-    if not request.headers.get('Authorization') == _auth_header:
+    if not is_valid_login(request.headers.get('Authorization'), _secret):
         return await _401_unauthorized()
 
     text = "Hello!"
@@ -31,7 +31,7 @@ async def handle(request):
 
 
 async def handle_blob(request):
-    if not request.headers.get('Authorization') == _auth_header:
+    if not is_valid_login(request.headers.get('Authorization'), _secret):
         return await _401_unauthorized()
 
     logging.info('blob received!')
