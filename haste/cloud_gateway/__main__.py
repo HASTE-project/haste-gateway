@@ -48,6 +48,7 @@ async def handle_blob(request):
 
 
 async def _401_unauthorized():
+    # TODO: this could be an exception?
     return web.Response(status=401,  # Unauthorized
                         body='The request has not been applied because it lacks valid authentication credentials for the target resource.',
                         headers={'WWW-Authenticate': 'Basic realm="HASTE Cloud"'})
@@ -59,4 +60,6 @@ app.add_routes([web.get('/', handle),
                 web.post('/stream/{stream_id}', handle_blob)
                 ])
 
-web.run_app(app)
+web.run_app(app,
+            port=80,
+            host='0.0.0.0')
