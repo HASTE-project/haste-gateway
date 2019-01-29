@@ -18,7 +18,8 @@ _secret = sys.argv[1]
 HIO_MASTER_HOST = '192.168.1.24'
 HIO_MASTER_PORT = 8080
 
-sc = StreamConnector(HIO_MASTER_HOST, HIO_MASTER_PORT, max_try=1, std_idle_time=1)
+# Looks like max_try is broken -- 0 => never try!
+sc = StreamConnector(HIO_MASTER_HOST, HIO_MASTER_PORT, max_try=2, std_idle_time=1)
 
 
 async def handle(request):
