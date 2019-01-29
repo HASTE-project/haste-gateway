@@ -36,9 +36,9 @@ async def handle_blob(request):
 
     logging.info('blob received!')
 
-    original_filename = 'X-HASTE-original_filename'
-    tag = 'X-HASTE-tag'
-    original_timestamp = 'X-HASTE-unixtime'
+    original_filename = request.headers['X-HASTE-original_filename']
+    tag = request.headers['X-HASTE-tag']
+    original_timestamp = request.headers['X-HASTE-unixtime']
 
     stream_id = request.match_info.get('stream_id')
 
