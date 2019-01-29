@@ -1,5 +1,8 @@
 Web Gateway for the HASTE Cloud
 
+
+[![Build Status](https://travis-ci.org/HASTE-project/haste-gateway.svg?branch=master)](https://travis-ci.org/HASTE-project/haste-gateway)
+
 Run it with username and password like this:
 ```
 python3 -m haste.cloud_gateway hastecloud letmein
