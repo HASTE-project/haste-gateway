@@ -1,0 +1,8 @@
+before_install:
+  - docker build --no-cache=true -t "benblamey/haste-gateway:latest" .
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
