@@ -59,19 +59,24 @@ async def handle_blob(request):
             'container_name': 'benblamey/haste-image-proc:latest',
             'container_os': 'ubuntu'}
         logging.info(f'accepted tag:{tag}, config:{config}')
+
+        # The format of this binary blob is specific to the image analysis code.
+        # TODO: add link!
+        pickled_metadata = bytearray(pickle.dumps(metadata))
+        message_bytes = pickled_metadata + file
+
+        logging.info('sending data to HIO...')
+        sc.send_data(config['container_name'],
+                     config['container_os'],
+                     message_bytes)
+    elif tag == 'discard':
+        # This tag simply discards on the server-side. For benchmarking.
+        logging.info(f'tag {tag} -- discarding blob.')
+        pass
     else:
         logging.info(f'rejected tag:{tag}')
         return await _412_tag_unknown()
 
-    # The format of this binary blob is specific to the image analysis code.
-    # TODO: add link!
-    pickled_metadata = bytearray(pickle.dumps(metadata))
-    message_bytes = pickled_metadata + file
-
-    logging.info('sending data to HIO...')
-    sc.send_data(config['container_name'],
-                 config['container_os'],
-                 message_bytes)
 
     return web.json_response({'result': 'OK!'})
 
