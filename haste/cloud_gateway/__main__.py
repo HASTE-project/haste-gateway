@@ -11,7 +11,8 @@ from harmonicIO.stream_connector.stream_connector import StreamConnector
 
 from haste.cloud_gateway.auth import is_valid_login
 
-_secret = sys.argv[1]
+
+_secret = None
 
 # std_idle_time is in seconds
 
@@ -94,12 +95,15 @@ async def _412_tag_unknown():
                         body='The request has not been applied because it lacks valid X-HASTE-tag.')
 
 
-app = web.Application()
-app.add_routes([web.get('/', handle),
-                web.get('/{name}', handle),
-                web.post('/stream/{stream_id}', handle_blob)
-                ])
+if __name__ == '__main__':
+    _secret = sys.argv[1]
 
-web.run_app(app,
-            port=8080,
-            host='0.0.0.0')
+    app = web.Application()
+    app.add_routes([web.get('/', handle),
+                    web.get('/{name}', handle),
+                    web.post('/stream/{stream_id}', handle_blob)
+                    ])
+
+    web.run_app(app,
+                port=8080,
+                host='0.0.0.0')
