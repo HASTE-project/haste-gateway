@@ -1,12 +1,19 @@
-Web Gateway for the HASTE Cloud
-
-
 [![Build Status](https://travis-ci.org/HASTE-project/haste-gateway.svg?branch=master)](https://travis-ci.org/HASTE-project/haste-gateway)
 
+Web Gateway for the HASTE Cloud. Part of the HASTE Toolkit.
+
+See:
+```
+"Rapid development of cloud-native intelligent data pipelines for scientific data streams using the HASTE Toolkit"
+https://www.biorxiv.org/content/10.1101/2020.09.13.274779v1
+```
+
 One configures the authentication like so:
+```
 0. Think up some credentials.
 0. Edit auth.py and run (don't check in!)
 0. This will print (a) the auth header the client needs to send (b) the hash of the auth header you need to run this app.
+```
 
 This allows the convenience of open-sourcing the web application, securely, whilst being configured with your choice of credentials. 
 
