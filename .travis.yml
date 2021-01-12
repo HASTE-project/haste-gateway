@@ -4,7 +4,10 @@ notifications:
   email: false
 
 before_install:
+# Build the docker image to test the DockerFile (don't use the image)
   - docker build --no-cache=true -t "benblamey/haste-gateway:latest" .
+# Now install the package and deps:
+- pip install -e .
 
 script:
 - pytest
